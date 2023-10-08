@@ -1,0 +1,8 @@
+AddShape circ #febb38 circle 50 50 50
+AddShape sh1 #123456 rectangle 50 100 50 50
+AddShape tr1 #00fefe triangle 100 100 150 150 100 150
+AddShape txt1 #ffaa88 text 200 200 20 Hello world
+drawpicture
+movepicture 0 222
+drawpicture
+exit

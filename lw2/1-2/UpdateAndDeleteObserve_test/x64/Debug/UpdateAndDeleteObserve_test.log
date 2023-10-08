@@ -1,0 +1,41 @@
+﻿  UpdateAndDeleteObserve_test.cpp
+  UpdateAndDeleteObserve_test.vcxproj -> C:\roman\C++\ood\lw2\1-2\x64\Debug\UpdateAndDeleteObserve_test.exe
+  Max Temp 31.5
+  Min Temp 31.5
+  Average Temp 31.5
+  
+  Max Temp 0.7
+  Min Temp 0.7
+  Average Temp 0.7
+  
+  Max Temp 760
+  Min Temp 760
+  Average Temp 760
+  ----------------
+  Current Temp 31.5
+  Current Hum 0.7
+  Current Pressure 760
+  ----------------
+  Current Temp 31.5
+  Current Hum 0.7
+  Current Pressure 760
+  ----------------
+  Current Temp 31.5
+  Current Hum 0.7
+  Current Pressure 760
+  ----------------
+  Max Temp 31.5
+  Min Temp 31.5
+  Average Temp 31.5
+  
+  Max Temp 0.7
+  Min Temp 0.7
+  Average Temp 0.7
+  
+  Max Temp 760
+  Min Temp 760
+  Average Temp 760
+  ----------------
+  ===============================================================================
+  All tests passed (2 assertions in 1 test case)
+  

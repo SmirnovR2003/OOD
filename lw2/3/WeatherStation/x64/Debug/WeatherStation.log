@@ -1,0 +1,3 @@
+﻿  main.cpp
+C:\roman\C++\ood\lw2\3\WeatherStation\main.cpp(33,32): error C2660: CWeatherData::SetMeasurements: функция не принимает 3 аргументов
+C:\roman\C++\ood\lw2\3\WeatherStation\WeatherData.h(81,7): message : см. объявление "CWeatherData::SetMeasurements"

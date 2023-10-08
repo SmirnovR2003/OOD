@@ -1,0 +1,37 @@
+﻿  WeatherStationDuo_tests.cpp
+  WeatherStationDuo_tests.vcxproj -> C:\roman\C++\ood\lw2\4\x64\Debug\WeatherStationDuo_tests.exe
+  Current In Temp 20
+  Current In Hum 0.7
+  Current In Pressure 760
+  ----------------
+  Max In Temp 20
+  Min In Temp 20
+  Average In Temp 20
+  ----------------
+  Current Out Temp 3
+  Current Out Hum 0.7
+  Current Out Pressure 760
+  ----------------
+  Max Out Temp 3
+  Min Out Temp 3
+  Average Out Temp 3
+  ----------------
+  Current In Temp 25
+  Current In Hum 0.8
+  Current In Pressure 770
+  ----------------
+  Max In Temp 25
+  Min In Temp 20
+  Average In Temp 22.5
+  ----------------
+  Current Out Temp 4
+  Current Out Hum 0.8
+  Current Out Pressure 761
+  ----------------
+  Max Out Temp 4
+  Min Out Temp 3
+  Average Out Temp 3.5
+  ----------------
+  ===============================================================================
+  All tests passed (1 assertion in 1 test case)
+  

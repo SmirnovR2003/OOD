@@ -1,0 +1,46 @@
+﻿  Canvas.cpp
+C:\roman\C++\ood\DrawPictures\DrawPictures\Canvas.cpp(25,59): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\roman\C++\ood\DrawPictures\DrawPictures\Canvas.cpp(25,41): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\roman\C++\ood\DrawPictures\DrawPictures\Canvas.cpp(26,30): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\roman\C++\ood\DrawPictures\DrawPictures\Canvas.cpp(26,27): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\roman\C++\ood\DrawPictures\DrawPictures\Canvas.cpp(68,29): warning C4244: аргумент: преобразование "double" в "unsigned int", возможна потеря данных
+C:\roman\C++\ood\DrawPictures\DrawPictures\Canvas.cpp(69,30): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\roman\C++\ood\DrawPictures\DrawPictures\Canvas.cpp(69,24): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\roman\C++\ood\DrawPictures\DrawPictures\Canvas.cpp(84,57): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\roman\C++\ood\DrawPictures\DrawPictures\Canvas.cpp(84,44): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+  Circle.cpp
+  main.cpp
+  Line.cpp
+  Rectangle.cpp
+  Shape.cpp
+  shapes.cpp
+  IDrawingStrategy.h
+  ShapesDrawingStrategy.hpp
+  Text.cpp
+  Triangle.cpp
+  Создание кода...
+  DrawPictures.vcxproj -> C:\roman\C++\ood\DrawPictures\x64\Debug\DrawPictures.exe

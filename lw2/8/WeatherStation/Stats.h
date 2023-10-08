@@ -1,0 +1,89 @@
+#pragma once
+#include <limits>
+#include <iostream>
+#include <sstream>
+#include <string>
+#include<cmath>
+
+double PI = acos(-1.0);
+
+struct Vector
+{
+	double x;
+	double y;
+};
+
+Vector GetVectorByDirection(int direction)
+{
+	//перевести через sin и cos
+	
+	return { cos(direction), sin(direction) };
+}
+
+class DefaultStat
+{
+public:
+	//убрать вывод
+	DefaultStat(std::string statName)
+		:m_statName(statName) 
+	{
+	}
+	void Update(double newStat)
+	{
+		if (m_minStat > newStat)
+		{
+			m_minStat = newStat;
+		}
+		if (m_maxStat < newStat)
+		{
+			m_maxStat = newStat;
+		}
+		m_accStat += newStat;
+		++m_countAcc;
+	}
+
+	double GetMin()
+	{
+		return m_minStat;
+	}
+
+	double GetMax()
+	{
+		return m_maxStat;
+	}
+
+	double GetAverage()
+	{
+		return m_accStat / m_countAcc;
+	}
+
+private:
+	std::string m_statName;
+	double m_minStat = std::numeric_limits<double>::infinity();
+	double m_maxStat = -std::numeric_limits<double>::infinity();
+	double m_accStat = 0;
+	unsigned m_countAcc = 0;
+};
+
+class WindDirectionStat
+{
+public:
+	//убрать вывод
+	void Update(int direction)
+	{
+		Vector newVec = GetVectorByDirection(direction);
+		vec.x += newVec.x;
+		vec.y += newVec.y;
+
+		m_direction = ((atan2(vec.y, vec.x) + PI) * 180 / PI);
+	}
+
+	double GetAverageDirection()
+	{
+		return m_direction;
+	}
+
+private:
+	double m_direction = 0;
+	Vector vec{0,0};
+};
