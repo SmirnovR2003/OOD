@@ -6,10 +6,20 @@
 #include <climits>
 #include "Observer.h"
 #include "Stats.h"
+#include<boost/signals2/signal.hpp>
+namespace signals = boost::signals2;
 
 namespace ph = std::placeholders;
 
-struct SWeatherInfo
+//добавить разные
+struct SWeatherInfoIn
+{
+	double temperature = 0;
+	double humidity = 0;
+	double pressure = 0;
+	std::string sensorName;
+};
+struct SWeatherInfoOut
 {
 	double temperature = 0;
 	double humidity = 0;
@@ -17,29 +27,187 @@ struct SWeatherInfo
 	double windSpeed = 0.0;
 	int windDirection = 0;
 	std::string sensorName;
-	CObservable<SWeatherInfo>* sensor;
 };
 
-class CWeatherData : public CObservable<SWeatherInfo>
+enum class SensorType
+{
+	In,
+	Out,
+};
+
+
+class CDisplayOut 
 {
 public:
-	CWeatherData(std::string name)
-		:m_name(name)
-	{}
-	// Температура в градусах Цельсия
-	double GetTemperature()const
+	void Update(SWeatherInfoOut const& data)
 	{
-		return m_temperature;
+		std::cout << "Current " << data.sensorName << " Temp " << data.temperature << std::endl;
+		std::cout << "Current " << data.sensorName << " Hum " << data.humidity << std::endl;
+		std::cout << "Current " << data.sensorName << " Pressure " << data.pressure << std::endl;
+		std::cout << "Current wind speed " << data.windSpeed << std::endl;
+		std::cout << "Current wind direction " << data.windDirection << std::endl;
+
+		std::cout << "----------------" << std::endl;
+	}
+};
+
+class CDisplayIn
+{
+public:
+	void Update(SWeatherInfoIn const& data)
+	{
+		std::cout << "Current " << data.sensorName << " Temp " << data.temperature << std::endl;
+		std::cout << "Current " << data.sensorName << " Hum " << data.humidity << std::endl;
+		std::cout << "Current " << data.sensorName << " Pressure " << data.pressure << std::endl;
+
+		std::cout << "----------------" << std::endl;
+	}
+};
+
+class CStatsDisplayOut
+{
+public:
+	CStatsDisplayOut()
+		: m_temperatureOut()
+		, m_windSpeed()
+		, m_windDirection()
+	{
+	};
+	void Update(SWeatherInfoOut const& data) 
+	{
+
+		m_temperatureOut.Update(data.temperature);
+		m_windSpeed.Update(data.windSpeed);
+		m_windDirection.Update(data.windDirection);
+
+		std::cout << "Max out temp " << m_temperatureOut.GetMax() << std::endl;
+		std::cout << "Min out temp " << m_temperatureOut.GetMin() << std::endl;
+		std::cout << "Average out temp " << m_temperatureOut.GetAverage() << std::endl;
+		std::cout << std::endl;
+
+		std::cout << "Max wind speed " << m_windSpeed.GetMax() << std::endl;
+		std::cout << "Min wind speed " << m_windSpeed.GetMin() << std::endl;
+		std::cout << "Average wind speed " << m_windSpeed.GetAverage() << std::endl;
+		std::cout << std::endl;
+
+		if (m_windDirection.IsAverageDirection())
+		{
+			std::cout << "Average wind direction " << m_windDirection.GetAverageDirection() << std::endl;
+		}
+		else
+		{
+			std::cout << "No average wind direction\n";
+		}
+
+
+		std::cout << "----------------" << std::endl;
+	}
+
+private:
+	DefaultStat m_temperatureOut;
+	DefaultStat m_windSpeed;
+	WindDirectionStat m_windDirection;
+};
+
+class CStatsDisplayIn
+{
+public:
+	CStatsDisplayIn()
+		: m_temperatureIn()
+	{
+	};
+	void Update(SWeatherInfoIn const& data)
+	{
+		m_temperatureIn.Update(data.temperature);
+		std::cout << "Max in temp " << m_temperatureIn.GetMax() << std::endl;
+		std::cout << "Min in temp " << m_temperatureIn.GetMin() << std::endl;
+		std::cout << "Average in temp " << m_temperatureIn.GetAverage() << std::endl;
+
+		std::cout << "----------------" << std::endl;
+	}
+
+private:
+	DefaultStat m_temperatureIn;
+};
+
+class CWeatherData
+{
+public:
+	using InUpdatedSignal = signals::signal<void(SWeatherInfoIn data)>;
+	using OutUpdatedSignal = signals::signal<void(SWeatherInfoOut data)>;
+	using InSlot = InUpdatedSignal::slot_type;
+	using OutSlot = OutUpdatedSignal::slot_type;
+	CWeatherData()
+	{
+	}
+
+	signals::connection RegisterObserver(const InSlot& slot, SensorType type)
+	{
+
+		return m_inObservers.connect(slot);
+
+	}
+
+	signals::connection RegisterObserver(const OutSlot& slot, SensorType type)
+	{
+		return m_outObservers.connect(slot);
+	}
+
+	void NotifyObservers(SensorType sensorType) 
+	{
+		if (sensorType == SensorType::In)
+		{
+			SWeatherInfoIn data = GetChangedInData();
+			m_inObservers(data);
+		}
+		else
+		{
+			SWeatherInfoOut data = GetChangedOutData();
+			m_outObservers(data);
+		}
+	}
+
+	void RemoveObserver(signals::connection observer, SensorType sensorType)
+	{
+		if (sensorType == SensorType::In)
+		{
+			m_inObservers.disconnect(observer);
+		}
+		else
+		{
+			m_outObservers.disconnect(observer);
+		}
+	}
+
+	// Температура в градусах Цельсия
+	double GetInTemperature()const
+	{
+		return m_inTemperature;
 	}
 	// Относительная влажность (0...100)
-	double GetHumidity()const
+	double GetInHumidity()const
 	{
-		return m_humidity;
+		return m_inHumidity;
 	}
 	// Атмосферное давление (в мм.рт.ст)
-	double GetPressure()const
+	double GetInPressure()const
 	{
-		return m_pressure;
+		return m_inPressure;
+	}
+	// Температура в градусах Цельсия
+	double GetOutTemperature()const
+	{
+		return m_outTemperature;
+	}
+	// Относительная влажность (0...100)
+	double GetOutHumidity()const
+	{
+		return m_outHumidity;
+	}
+	// Атмосферное давление (в мм.рт.ст)
+	double GetOutPressure()const
+	{
+		return m_outPressure;
 	}
 
 	double GetWindSpeed()const
@@ -52,130 +220,61 @@ public:
 		return m_windDirection;
 	}
 
-	void MeasurementsChanged()
+	void SetMeasurements(double temp, double humidity, double pressure)
 	{
-		NotifyObservers();
+		m_inHumidity = humidity;
+		m_inTemperature = temp;
+		m_inPressure = pressure;
+
+		NotifyObservers(SensorType::In);
 	}
 
 	void SetMeasurements(double temp, double humidity, double pressure, double windSpeed, int windDirection)
 	{
-		m_humidity = humidity;
-		m_temperature = temp;
-		m_pressure = pressure;
+		m_outHumidity = humidity;
+		m_outTemperature = temp;
+		m_outPressure = pressure;
 		m_windSpeed = windSpeed;
 		m_windDirection = windDirection;
 
-		MeasurementsChanged();
+		NotifyObservers(SensorType::Out);
 	}
 protected:
-	SWeatherInfo GetChangedData()const override
+	SWeatherInfoIn GetChangedInData()const 
 	{
-		SWeatherInfo info;
+		SWeatherInfoIn info;
 
-		info.temperature = GetTemperature();
-		info.humidity = GetHumidity();
-		info.pressure = GetPressure();
+		info.temperature = GetInTemperature();
+		info.humidity = GetInHumidity();
+		info.pressure = GetInPressure();
+		info.sensorName = "In";
+
+		return info;
+	}
+	SWeatherInfoOut GetChangedOutData()const 
+	{
+		SWeatherInfoOut info;
+
+		info.temperature = GetOutTemperature();
+		info.humidity = GetOutHumidity();
+		info.pressure = GetOutPressure();
 		info.windSpeed = GetWindSpeed();
 		info.windDirection = GetWindDirection();
-		info.sensorName = m_name;
+		info.sensorName = "Out";
 
 		return info;
 	}
 private:
-	double m_temperature = 0.0;
-	double m_humidity = 0.0;
-	double m_pressure = 760.0;
+
+	double m_inTemperature = 0.0;
+	double m_inHumidity = 0.0;
+	double m_inPressure = 760.0;
+	double m_outTemperature = 0.0;
+	double m_outHumidity = 0.0;
+	double m_outPressure = 760.0;
 	double m_windSpeed = 0.0;
 	int m_windDirection = 0;
-	std::string m_name;
-};
 
-
-class CDisplay: public IObserver<SWeatherInfo>
-{
-public:
-	/* Метод Update сделан приватным, чтобы ограничить возможность его вызова напрямую
-		Классу CObservable он будет доступен все равно, т.к. в интерфейсе IObserver он
-		остается публичным
-	*/
-	void AddObservable(CObservable<SWeatherInfo>* const observable)override
-	{
-		m_sensors.push_back(observable);
-	}
-	void Update(SWeatherInfo const& data) override
-	{
-		std::cout << "Current " << data.sensorName << " Temp " << data.temperature << std::endl;
-		std::cout << "Current " << data.sensorName << " Hum " << data.humidity << std::endl;
-		std::cout << "Current " << data.sensorName << " Pressure " << data.pressure << std::endl;
-
-		if (data.sensor == m_sensors[1])
-		{
-			std::cout << "Current wind speed " << data.windSpeed << std::endl;
-			std::cout << "Current wind direction " << data.windDirection << std::endl;
-		}
-
-		std::cout << "----------------" << std::endl;
-	}
-private:
-	std::vector<CObservable<SWeatherInfo>*> m_sensors;
-};
-
-class CStatsDisplay : public IObserver<SWeatherInfo>
-{
-public:
-	CStatsDisplay()
-		: m_temperatureIn("In Temp")
-		, m_temperatureOut("Out Temp")
-		, m_windSpeed("wind speed")
-		, m_windDirection()
-	{
-	};
-private:
-
-	void AddObservable(CObservable<SWeatherInfo>* const observable)override
-	{
-		m_sensors.push_back(observable);
-	}
-	/* Метод Update сделан приватным, чтобы ограничить возможность его вызова напрямую
-	Классу CObservable он будет доступен все равно, т.к. в интерфейсе IObserver он
-	остается публичным
-	*/
-	void Update(SWeatherInfo const& data) override
-	{
-		if (data.sensor == m_sensors[0])
-		{
-			m_temperatureIn.Update(data.temperature);
-
-			std::cout << "Max in temp " << m_temperatureIn.GetMax() << std::endl;
-			std::cout << "Min in temp " << m_temperatureIn.GetMin() << std::endl;
-			std::cout << "Average in temp " << m_temperatureIn.GetAverage() << std::endl;
-		}
-		else
-		{
-			m_temperatureOut.Update(data.temperature);
-			m_windSpeed.Update(data.windSpeed);
-			m_windDirection.Update(data.windDirection);
-
-			std::cout << "Max in temp " << m_temperatureOut.GetMax() << std::endl;
-			std::cout << "Min in temp " << m_temperatureOut.GetMin() << std::endl;
-			std::cout << "Average in temp " << m_temperatureOut.GetAverage() << std::endl;
-			std::cout << std::endl;
-
-			std::cout << "Max in wind speed " << m_windSpeed.GetMax() << std::endl;
-			std::cout << "Min in wind speed " << m_windSpeed.GetMin() << std::endl;
-			std::cout << "Average in wind speed " << m_windSpeed.GetAverage() << std::endl;
-			std::cout << std::endl;
-
-			std::cout << "Average wind direction " << m_windDirection.GetAverageDirection() << std::endl;
-		}
-		
-		std::cout << "----------------" << std::endl;
-	}
-
-private:
-	std::vector<CObservable<SWeatherInfo>*> m_sensors;
-	DefaultStat m_temperatureIn;
-	DefaultStat m_temperatureOut;
-	DefaultStat m_windSpeed;
-	WindDirectionStat m_windDirection;
+	InUpdatedSignal m_inObservers;
+	OutUpdatedSignal m_outObservers;
 };

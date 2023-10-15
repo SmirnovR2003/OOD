@@ -16,16 +16,24 @@ struct Vector
 Vector GetVectorByDirection(int direction)
 {
 	//перевести через sin и cos
-	
-	return { cos(direction), sin(direction) };
+	switch (direction)
+	{
+	case 90:
+		return { 0, 1 };
+	case 180:
+		return { -1, 0 };
+	case 270:
+		return { 0, -1 };
+	default:
+		return { cos(direction), sin(direction) };
+	}
 }
 
 class DefaultStat
 {
 public:
 	//убрать вывод
-	DefaultStat(std::string statName)
-		:m_statName(statName) 
+	DefaultStat()
 	{
 	}
 	void Update(double newStat)
@@ -58,7 +66,6 @@ public:
 	}
 
 private:
-	std::string m_statName;
 	double m_minStat = std::numeric_limits<double>::infinity();
 	double m_maxStat = -std::numeric_limits<double>::infinity();
 	double m_accStat = 0;
@@ -68,14 +75,18 @@ private:
 class WindDirectionStat
 {
 public:
-	//убрать вывод
 	void Update(int direction)
 	{
 		Vector newVec = GetVectorByDirection(direction);
-		vec.x += newVec.x;
-		vec.y += newVec.y;
+		m_vec.x += newVec.x;
+		m_vec.y += newVec.y;
 
-		m_direction = ((atan2(vec.y, vec.x) + PI) * 180 / PI);
+		m_direction = ((atan2(m_vec.y, m_vec.x) + PI) * 180 / PI);
+	}
+
+	bool IsAverageDirection()
+	{
+		return !(m_vec.x == 0 && m_vec.y == 0);
 	}
 
 	double GetAverageDirection()
@@ -85,5 +96,5 @@ public:
 
 private:
 	double m_direction = 0;
-	Vector vec{0,0};
+	Vector m_vec{0,0};
 };

@@ -58,6 +58,7 @@ public:
 		}
 	}
 
+	//добавить приоритеты
 	void RemoveObserver(Type type, ObserverType & observer) override
 	{
 		auto its = m_observers.equal_range(type);

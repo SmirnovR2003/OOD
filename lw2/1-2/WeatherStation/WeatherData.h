@@ -29,10 +29,9 @@ private:
 	*/
 	void Update(SWeatherInfo const& data) override
 	{
-		if (data.temperature == 31.5)
-		{
-			m_observable->RemoveObserver(*this);
-		}
+		//создать mock объект
+		m_observable->RemoveObserver(*this);
+		
 		std::cout << "Current Temp " << data.temperature << std::endl;
 		std::cout << "Current Hum " << data.humidity << std::endl;
 		std::cout << "Current Pressure " << data.pressure << std::endl;

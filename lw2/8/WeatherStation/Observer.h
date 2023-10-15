@@ -50,11 +50,13 @@ public:
 protected:
 	// Классы-наследники должны перегрузить данный метод, 
 	// в котором возвращать информацию об изменениях в объекте
+
+	//убрать интерфэйсы из этого файла
 	virtual T GetChangedData()const = 0;
 
 private:
+
 	UpdateSignal m_sigObservers;
-	std::set<IObservable *> m_observers;
 };
 
 /*
@@ -68,6 +70,5 @@ class IObserver
 {
 public:
 	virtual void Update(T const& data) = 0;
-	virtual void AddObservable(CObservable<T>* const observable) = 0;
 	virtual ~IObserver() = default;
 };

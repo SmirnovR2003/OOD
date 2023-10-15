@@ -62,15 +62,6 @@ private:
 
 class CStatsDisplay : public IObserver<StatsType,SWeatherInfo>
 {
-public:
-	CStatsDisplay()
-		: m_temperature("Temp")
-		, m_humidity("Hum")
-		, m_pressure("Pres")
-		, m_windSpeed("wind speed")
-		, m_windDirection()
-	{
-	};
 private:
 	/* Метод Update сделан приватным, чтобы ограничить возможность его вызова напрямую
 	Классу CObservable он будет доступен все равно, т.к. в интерфейсе IObserver он
@@ -81,17 +72,42 @@ private:
 		switch (type)
 		{
 		case StatsType::Temperature:
-			m_temperature.UpdateAndShowStats(data.temperature);
+			m_temperature.Update(data.temperature);
+			std::cout << "Max out temp " << m_temperature.GetMax() << std::endl;
+			std::cout << "Min out temp " << m_temperature.GetMin() << std::endl;
+			std::cout << "Average out temp " << m_temperature.GetAverage() << std::endl;
 			break;
+
 		case StatsType::Humidity:
-			m_humidity.UpdateAndShowStats(data.humidity);
+			m_humidity.Update(data.humidity);
+			std::cout << "Max out hum " << m_humidity.GetMax() << std::endl;
+			std::cout << "Min out hum " << m_humidity.GetMin() << std::endl;
+			std::cout << "Average out hum " << m_humidity.GetAverage() << std::endl;
 			break;
+
 		case StatsType::Pressure:
-			m_pressure.UpdateAndShowStats(data.pressure);
+			m_pressure.Update(data.pressure);
+			std::cout << "Max out pres " << m_pressure.GetMax() << std::endl;
+			std::cout << "Min out pres " << m_pressure.GetMin() << std::endl;
+			std::cout << "Average out pres " << m_pressure.GetAverage() << std::endl;
 			break;
+
 		case StatsType::Wind:
-			m_windSpeed.UpdateAndShowStats(data.windSpeed);
-			m_windDirection.UpdateAndShowStats(data.windDirection);
+			m_windSpeed.Update(data.windSpeed);
+			m_windDirection.Update(data.windDirection);
+
+			std::cout << "Max wind speed " << m_windSpeed.GetMax() << std::endl;
+			std::cout << "Min wind speed " << m_windSpeed.GetMin() << std::endl;
+			std::cout << "Average wind speed " << m_windSpeed.GetAverage() << std::endl;
+			std::cout << std::endl;
+			if (m_windDirection.IsAverageDirection())
+			{
+				std::cout << "No average wind direction\n";
+			}
+			else
+			{
+				std::cout << "Average wind direction " << m_windDirection.GetAverageDirection() << std::endl;
+			}
 			break;
 		default:
 			break;

@@ -46,14 +46,7 @@ public:
 	void NotifyObservers() override
 	{
 		T data = GetChangedData();
-		/*for (auto& observer : m_observers)
-		{
-			if (observer)
-			{
-				
-
-			}
-		}*/
+		
 		for (auto it = m_observers.begin(); it != m_observers.end(); )
 		{
 			(*(it++))->Update(data);

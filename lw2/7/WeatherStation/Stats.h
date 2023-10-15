@@ -9,36 +9,34 @@ double PI = acos(-1.0);
 
 struct Vector
 {
-	int x;
-	int y;
+	double x;
+	double y;
 };
 
 Vector GetVectorByDirection(int direction)
 {
+	//перевести через sin и cos
 	switch (direction)
 	{
-	case 0:
-		return{ 1,0 };
 	case 90:
-		return{ 0,1 };
+		return { 0, -1 };
 	case 180:
-		return{ -1,0 };
+		return { -1, 0 };
 	case 270:
-		return{ 0,-1 };
-
+		return { 0, 1 };
 	default:
-		return {0,0};
+		return { cos(direction), sin(direction) };
 	}
 }
 
 class DefaultStat
 {
 public:
-	DefaultStat(std::string statName)
-		:m_statName(statName) 
+	//убрать вывод
+	DefaultStat()
 	{
 	}
-	void UpdateAndShowStats(double newStat)
+	void Update(double newStat)
 	{
 		if (m_minStat > newStat)
 		{
@@ -50,14 +48,24 @@ public:
 		}
 		m_accStat += newStat;
 		++m_countAcc;
-
-		std::cout << "Max " << m_statName << " " << m_maxStat << std::endl;
-		std::cout << "Min " << m_statName << " " << m_minStat << std::endl;
-		std::cout << "Average " << m_statName << " " << (m_accStat / m_countAcc) << std::endl;
-
 	}
+
+	double GetMin()
+	{
+		return m_minStat;
+	}
+
+	double GetMax()
+	{
+		return m_maxStat;
+	}
+
+	double GetAverage()
+	{
+		return m_accStat / m_countAcc;
+	}
+
 private:
-	std::string m_statName;
 	double m_minStat = std::numeric_limits<double>::infinity();
 	double m_maxStat = -std::numeric_limits<double>::infinity();
 	double m_accStat = 0;
@@ -67,24 +75,26 @@ private:
 class WindDirectionStat
 {
 public:
-	void UpdateAndShowStats(int direction)
+	//убрать вывод
+	void Update(int direction)
 	{
 		Vector newVec = GetVectorByDirection(direction);
 		vec.x += newVec.x;
 		vec.y += newVec.y;
-
-		double m_direction = ((int)((atan2(vec.y, vec.x)) * 180 / PI + 360)) % 360;
-
-		if (vec.x == 0 && vec.y == 0)
-		{
-			std::cout << "on average, there is no wind direction\n";
-		}
-		else
-		{
-			std::cout << "Average wind direction " << m_direction << std::endl;
-		}
+		m_direction = ((atan2(vec.y, vec.x) + PI) * 180 / PI);
 	}
+
+	bool IsAverageDirection()
+	{
+		return vec.x == 0 && vec.y == 0;
+	}
+
+	double GetAverageDirection()
+	{
+		return m_direction;
+	}
+
 private:
-	
-	Vector vec{0,0};
+	double m_direction = 0;
+	Vector vec{ 0,0 };
 };
