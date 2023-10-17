@@ -1,14 +1,14 @@
 #pragma once
 #include "Condiments.h"
 
-// Тип ликера
+// пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 enum class LiqueurType
 {
-	Chocolate,	// Шоколадный
-	Nut,		// Ореховый
+	Chocolate,	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	Nut,		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 };
 
-// Добавка "Ликер"
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅ"
 class CLiqueur : public CCondimentDecorator
 {
 public:

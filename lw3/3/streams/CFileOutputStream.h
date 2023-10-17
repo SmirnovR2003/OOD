@@ -6,7 +6,7 @@ class CFileOutputStream :
 {
 public:
 	CFileOutputStream(const char* fileName)
-		:file(fileName, std::ios::out | std::ios::binary)
+		:file(fileName, std::ofstream::binary)
 		, isClosed(false)
 	{
 	}
@@ -30,7 +30,11 @@ public:
 		{
 			throw std::logic_error("file is closed");
 		}
-		file.write((char*)srcData, size);
+		uint8_t* charData = (uint8_t*)srcData;
+		for (int i = 0; i < size; i++)
+		{
+			file.put(charData[i]);
+		}
 	}
 
 	// Закрывает поток. Операции над ним после этого должны выбрасывать исключение logic_error
@@ -45,7 +49,7 @@ public:
 		isClosed = true;
 	}
 private:
-	bool isClosed = true;
+	bool isClosed;
 	std::ofstream file;
 };
 

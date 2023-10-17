@@ -149,12 +149,18 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CCompress.h" />
+    <ClInclude Include="CCrypt.h" />
+    <ClInclude Include="CDecompress.h" />
+    <ClInclude Include="CDecrypt.h" />
     <ClInclude Include="CFileInputStream.h" />
     <ClInclude Include="CFileOutputStream.h" />
     <ClInclude Include="CMemoryInputStream.h" />
     <ClInclude Include="CMemoryOutputStream.h" />
     <ClInclude Include="IInputStream.h" />
+    <ClInclude Include="IInputStreamDecorator.h" />
     <ClInclude Include="IOutputStream.h" />
+    <ClInclude Include="IOutputStreamDecorator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

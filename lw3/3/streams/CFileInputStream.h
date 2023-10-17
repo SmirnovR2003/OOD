@@ -6,7 +6,7 @@ class CFileInputStream :
 {
 public:
 	CFileInputStream(const char* fileName)
-		:file(fileName, std::ios::in | std::ios::binary)
+		:file(fileName, std::ifstream::binary)
 		, isClosed(false)
 	{
 	}
@@ -42,7 +42,8 @@ public:
 		{
 			throw std::logic_error("file is closed");
 		}
-		file.read((char*)dstBuffer, size);
+		uint8_t* charData = (uint8_t*)dstBuffer;
+		file.read((char*)charData, size);
 		return file.gcount();
 	}
 
@@ -57,7 +58,7 @@ public:
 		isClosed = true;
 	}
 private:
-	bool isClosed = true;
+	bool isClosed;
 	std::ifstream file;
 };
 

@@ -23,3 +23,4 @@ public:
 
 	virtual ~IInputStream() = default;
 };
+typedef std::unique_ptr<IInputStream> IInputStreamPtr;
