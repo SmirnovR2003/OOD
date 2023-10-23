@@ -1,0 +1,22 @@
+﻿  main.cpp
+C:\roman\C++\ood\lw4\1\1\CCanvas.h(25,53): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\roman\C++\ood\lw4\1\1\CCanvas.h(25,43): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\roman\C++\ood\lw4\1\1\CCanvas.h(26,53): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\roman\C++\ood\lw4\1\1\CCanvas.h(26,43): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+  1.vcxproj -> C:\roman\C++\ood\lw4\1\x64\Debug\1.exe

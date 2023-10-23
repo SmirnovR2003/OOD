@@ -1,0 +1,4 @@
+rectangle red 0 0 100 200
+triangle pink 200 100 150 150 0 100
+ellipse green 500 500 100 100
+regularPolygon blue 200 500 100 10
