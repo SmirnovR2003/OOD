@@ -47,9 +47,6 @@
     <ClInclude Include="CShapeFactory.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="IDesigner.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="CPictureDraft.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>

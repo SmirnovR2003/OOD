@@ -15,10 +15,19 @@ int main()
 	ifstream fIn("in.txt");
 	CShapeFactory shapeFactory;
 	CDesigner designer(make_unique<CShapeFactory>(shapeFactory) );
-	sf::RenderWindow tar(sf::VideoMode(800, 800), "Picture.png");
-	CCanvas canvas(&tar);
+	sf::RenderWindow window(sf::VideoMode(800, 800), "Picture.png");
+	CCanvas canvas(&window);
 
 	CPainter painter;
 	painter.DrawPicture(designer.CreateDraft(fIn), &canvas);
-	canvas.ShowFinalPicture();
+
+
+	while (window.isOpen())
+	{
+		sf::Event event;
+		if (window.pollEvent(event) && event.type == sf::Event::Closed)
+			window.close();
+
+		window.display();
+	}
 }

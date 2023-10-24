@@ -14,7 +14,7 @@ class ICanvas
 public:
 	virtual void SetColor(sf::Color color) = 0;
 	virtual void DrawLine(Vertex point1, Vertex point2) = 0;
-	virtual void DrawEllipse(Vertex center, double rx, double ry) = 0;
-
+	virtual void DrawEllipse(Vertex center, double w, double h) = 0;
+	~ICanvas() = default;
 };
 

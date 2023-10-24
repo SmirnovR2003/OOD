@@ -1,10 +1,9 @@
 #pragma once
-#include "IDesigner.h"
+#include "CPictureDraft.h"
 #include"IShapeFactory.h"
 #include<string>
 
-class CDesigner :
-    public IDesigner
+class CDesigner 
 {
 public:
     CDesigner(std::unique_ptr<IShapeFactory> shapeFactory)
@@ -12,7 +11,7 @@ public:
     {
     }
 
-    CPictureDraft CreateDraft(std::istream& strm) override
+    CPictureDraft CreateDraft(std::istream& strm) 
     {
         std::string shapeDescr;
         std::vector<std::shared_ptr<CShape>> shapes;

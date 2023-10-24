@@ -4,6 +4,8 @@ class CTriangle :
     public CShape
 {
 public:
+    //добавить к методам const
+
     CTriangle(sf::Color& color, Vertex vertex1, Vertex vertex2, Vertex vertex3)
         :CShape(color)
         , m_vertex1(vertex1)
