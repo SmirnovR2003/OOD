@@ -41,12 +41,12 @@ public:
 		}
 	}
 
-	//забыл close у вложенного потока(можно применить шаблонный метод)
+	//забыл close у вложенного потока
 	void Close()override
 	{
 		WriteDecoratedByte(m_currentByteCounter);
 		WriteDecoratedByte(m_currentByte);
-
+		COutputStreamDecorator::Close();
 	}
 
 	uint8_t m_currentByteCounter = 0;

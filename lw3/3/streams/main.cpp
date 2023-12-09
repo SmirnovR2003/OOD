@@ -60,7 +60,6 @@ int main(int argc, char* argv[])
 		{
 			auto newOutFilePtr = AddCompressTurn(move(outFilePtr));
 			outFilePtr.swap(move(newOutFilePtr));
-
 		}
 		else if (strcmp(argv[i], "--decompress") == 0)
 		{
@@ -72,13 +71,15 @@ int main(int argc, char* argv[])
 			cout << argv[i] << " is invalid command on number " << i << endl;
 		}
 	}
+
 	
-	
-	uint8_t* buf = new uint8_t;
+	uint8_t buf;
 	while (!inFilePtr->IsEOF())
 	{
 		outFilePtr->WriteByte(inFilePtr->ReadByte());
 	}
+	inFilePtr->Close();
+	outFilePtr->Close();
 	cout << "all ok\n";
 	return 0;
 }
