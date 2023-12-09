@@ -1,0 +1,11 @@
+rectangle FFFBE200 none 0 0 300 774 300
+rectangle FF00D1FF none 0 0 0 774 300
+ellipse FFFAFF00 none 0 615 44 100 100
+ellipse FF082DEA FF42FF00 10 412 423 247 112
+composite
+rectangle FFFF0000 000000 2 99 434 159 113
+rectangle FF000000 none 0 201 323 25 88
+triangle FF52CC33 FF000000 5 150 359 300 434 58 434
+end
+
+ 

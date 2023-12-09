@@ -1,0 +1,5 @@
+﻿  1.cpp
+  CGroupShape.cpp
+  Создание кода...
+LINK : warning LNK4300: "/INCREMENTAL" игнорируется, так как входной модуль содержит метаданные ASAN
+  1.vcxproj -> C:\roman\C++\ood\lw7\1\x64\Debug\1.exe
