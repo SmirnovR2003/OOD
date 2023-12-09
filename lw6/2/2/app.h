@@ -28,7 +28,6 @@ namespace app
 
 	void PaintPictureOnModernGraphicsRenderer()
 	{
-		//modern_graphics_lib::CModernGraphicsRenderer renderer(cout);
 		ModernGraphicsLibAdapter adaptRenderer(std::cout);
 		shape_drawing_lib::CCanvasPainter painter(adaptRenderer);
 		PaintPicture(painter);

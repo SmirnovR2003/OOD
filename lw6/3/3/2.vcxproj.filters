@@ -29,10 +29,13 @@
     <ClInclude Include="shape_drawing_lib.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="ModernGraphicsLibAdapter.h">
+    <ClInclude Include="ModernGraphicsLibObjectAdapter.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="app.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="ModernGraphicsLibClassAdapter.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

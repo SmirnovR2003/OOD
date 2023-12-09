@@ -2,19 +2,21 @@
 #include <iostream>
 #include <sstream>
 #include "../../../catch2/catch.hpp"
-#include "../1/app.h"
+#include "../2/app.h"
 
 using namespace std;
 
 SCENARIO("test")
 {
 	ostringstream out;
-	{
-		modern_graphics_lib::CModernGraphicsRenderer renderer(out);
-		ModernGraphicsLibAdapter adaptRenderer(renderer);
-		shape_drawing_lib::CCanvasPainter painter(adaptRenderer);
-		app::PaintPicture(painter);
-	}
+
+	modern_graphics_lib::CModernGraphicsRenderer renderer(out);
+	ModernGraphicsLibAdapter adaptRenderer(renderer);
+	shape_drawing_lib::CCanvasPainter painter(adaptRenderer);
+	renderer.BeginDraw();
+	app::PaintPicture(painter);
+	renderer.EndDraw();
+
 
 	CHECK(out.str() == "<draw>\n"
 		"  <line fromX=\"10\" fromY=\"15\" toX=\"100\" toY=\"200\"/>\n"

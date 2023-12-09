@@ -147,7 +147,8 @@
   <ItemGroup>
     <ClInclude Include="app.h" />
     <ClInclude Include="grahics_lib.h" />
-    <ClInclude Include="ModernGraphicsLibAdapter.h" />
+    <ClInclude Include="ModernGraphicsLibObjectAdapter.h" />
+    <ClInclude Include="ModernGraphicsLibClassAdapter.h" />
     <ClInclude Include="modern_graphics_lib.h" />
     <ClInclude Include="shape_drawing_lib.h" />
   </ItemGroup>

@@ -4,7 +4,7 @@
 #pragma once
 class ModernGraphicsLibAdapter : 
 	public graphics_lib::ICanvas,
-	public modern_graphics_lib::CModernGraphicsRenderer
+	private modern_graphics_lib::CModernGraphicsRenderer
 {
 public:
 	ModernGraphicsLibAdapter(std::ostream& strm)

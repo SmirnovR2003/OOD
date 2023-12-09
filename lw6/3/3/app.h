@@ -2,7 +2,7 @@
 #include <iostream>
 #include "shape_drawing_lib.h"
 #include "modern_graphics_lib.h"
-#include "ModernGraphicsLibAdapter.h"
+#include "ModernGraphicsLibObjectAdapter.h"
 #include <boost/format.hpp>
 
 // Пространство имен приложения (доступно для модификации)
@@ -12,11 +12,11 @@ namespace app
 	{
 		using namespace shape_drawing_lib;
 
-		CTriangle triangle({ 10, 15 }, { 100, 200 }, { 150, 250 });
-		CRectangle rectangle({ 30, 40 }, 18, 24);
+		CTriangle triangle({ 10, 15 }, { 100, 200 }, { 150, 250 }, 0xffffff);
+		CRectangle rectangle({ 30, 40 }, 18, 24, 0xff0000);
 
-		painter.Draw(triangle, 0x122334);
-		painter.Draw(rectangle, 0x533334);
+		painter.Draw(triangle);
+		painter.Draw(rectangle);
 	} 
 
 	void PaintPictureOnCanvas()
@@ -29,9 +29,11 @@ namespace app
 	void PaintPictureOnModernGraphicsRenderer()
 	{
 		modern_graphics_lib::CModernGraphicsRenderer renderer(std::cout);
-		ModernGraphicsLibAdapter adaptRenderer(renderer);
+		ModernGraphicsLibObjectAdapter adaptRenderer(renderer);
 		shape_drawing_lib::CCanvasPainter painter(adaptRenderer);
+		renderer.BeginDraw();
 		PaintPicture(painter);
+		renderer.EndDraw();
 	}
 }
 
