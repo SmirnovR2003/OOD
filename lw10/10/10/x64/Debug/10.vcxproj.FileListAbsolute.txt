@@ -1,3 +1,0 @@
-C:\roman\C++\ood\lw10\10\10\x64\Debug\10.vcxproj.AssemblyReference.cache
-C:\roman\C++\ood\lw10\10\10\x64\Debug\My10.MyForm.resources
-C:\roman\C++\ood\lw10\10\10\x64\Debug\10.vcxproj.GenerateResource.cache

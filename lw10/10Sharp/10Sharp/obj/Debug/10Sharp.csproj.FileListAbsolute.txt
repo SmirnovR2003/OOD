@@ -1,0 +1,10 @@
+C:\roman\C++\ood\lw10\10Sharp\10Sharp\bin\Debug\10Sharp.exe.config
+C:\roman\C++\ood\lw10\10Sharp\10Sharp\bin\Debug\10Sharp.exe
+C:\roman\C++\ood\lw10\10Sharp\10Sharp\bin\Debug\10Sharp.pdb
+C:\roman\C++\ood\lw10\10Sharp\10Sharp\obj\Debug\10Sharp.csproj.AssemblyReference.cache
+C:\roman\C++\ood\lw10\10Sharp\10Sharp\obj\Debug\_10Sharp.Properties.Resources.resources
+C:\roman\C++\ood\lw10\10Sharp\10Sharp\obj\Debug\10Sharp.csproj.GenerateResource.cache
+C:\roman\C++\ood\lw10\10Sharp\10Sharp\obj\Debug\10Sharp.csproj.CoreCompileInputs.cache
+C:\roman\C++\ood\lw10\10Sharp\10Sharp\obj\Debug\10Sharp.exe
+C:\roman\C++\ood\lw10\10Sharp\10Sharp\obj\Debug\10Sharp.pdb
+C:\roman\C++\ood\lw10\10Sharp\10Sharp\obj\Debug\_10Sharp.Form1.resources
